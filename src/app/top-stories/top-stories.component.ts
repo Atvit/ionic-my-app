@@ -1,6 +1,6 @@
-import { Component, OnDestroy, OnInit } from "@angular/core";
-import { Subscription } from "rxjs";
+import { Component, OnInit, OnDestroy } from "@angular/core";
 import { Items } from "../model/items";
+import { Subscription } from "rxjs";
 import { ItemService } from "../services/item/item.service";
 
 @Component({
@@ -13,13 +13,11 @@ export class TopStoriesComponent implements OnInit, OnDestroy {
   private subscription: Subscription;
 
   constructor(private itemService: ItemService) {}
-
   ngOnInit() {
     this.subscription = this.itemService
       .load(0, 10)
       .subscribe(items => (this.items = items));
   }
-
   ngOnDestroy() {
     if (this.subscription) {
       this.subscription.unsubscribe();
